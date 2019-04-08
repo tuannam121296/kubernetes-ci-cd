@@ -20,8 +20,8 @@ node {
 
         sh "docker push ${imageName}"
 
-    stage "Deploy"
+    # stage "Deploy"
 
-        kubernetesDeploy configs: "applications/${appName}/k8s/*.yaml", kubeconfigId: 'nam_kube'
+        # kubernetesDeploy configs: "applications/${appName}/k8s/*.yaml", kubeconfigId: 'nam_kube'
 
 }
