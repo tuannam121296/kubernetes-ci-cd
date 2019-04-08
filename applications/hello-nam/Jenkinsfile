@@ -23,4 +23,5 @@ node {
     stage "Deploy"
 
         sh "sed 's#__IMAGE__#'$BUILDIMG'#' applications/hello-nam/k8s/deployment.yaml | kubectl apply -f -"
+        sh "(Get-Content applications/hello-nam/k8s/deployment.yaml).replace('$BUILD_TAG', $tag) | Set-Content applications/hello-nam/k8s/deployment.yaml"
 }
