@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-nam
+  labels:
+    app: hello-nam
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: hello-nam
+    tier: hello-nam
+  type: NodePort
+
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: hello-nam
+  labels:
+    app: hello-nam
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: hello-nam
+        tier: hello-nam
+    spec:
+      containers:
+      - image: 127.0.0.1:30400/hello-nam:latest
+        name: hello-nam
+        ports:
+        - containerPort: 80
+          name: hello-nam
